@@ -1,0 +1,39 @@
+<mat-tab-group>
+  <mat-tab
+    *ngFor="let tabItem of (service.tabItems$ | async); let index = index"
+  >
+    <ng-template mat-tab-label>
+      <mat-icon class="icon" aria-label="icon for tab">{{
+        tabItem.iconName
+      }}</mat-icon>
+      <span class="full">{{ tabItem.label }}</span>
+
+      <mat-icon
+        class="close"
+        (click)="service.close(index)"
+        aria-label="close tab button"
+        >close</mat-icon
+      >
+    </ng-template>
+
+    <ng-container *ngIf="tabItem.component.moduleFactory">
+      <ng-container
+        *ngComponentOutlet="
+          tabItem.component.componentType;
+          ngModuleFactory: tabItem.component.moduleFactory;
+          injector: tabItem.component.injector
+        "
+      >
+      </ng-container>
+    </ng-container>
+    <ng-container *ngIf="!tabItem.component.moduleFactory">
+      <ng-container
+        *ngComponentOutlet="
+          tabItem.component.componentType;
+          injector: tabItem.component.injector
+        "
+      >
+      </ng-container>
+    </ng-container>
+  </mat-tab>
+</mat-tab-group>
