@@ -1,7 +1,5 @@
 <mat-tab-group>
-  <mat-tab
-    *ngFor="let tabItem of (service.tabItems$ | async); let index = index"
-  >
+  <mat-tab *ngFor="let tabItem of service.tabItems$ | async; let index = index">
     <ng-template mat-tab-label>
       <mat-icon class="icon" aria-label="icon for tab">{{
         tabItem.iconName
