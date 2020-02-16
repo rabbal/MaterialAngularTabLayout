@@ -27,7 +27,6 @@
               "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
               "src/styles.scss"
             ],
-            "lazyModules": ["src/app/lazy/lazy.module"],
             "scripts": []
           },
           "configurations": {
