@@ -8,6 +8,7 @@ import {
 
 import { OpenNewTabModel } from '../models/open-new-tab-model';
 import { TabItem } from '../models/tab-item';
+import { LazyLoaderService } from './lazy-loader.service';
 
 @Injectable({
   providedIn: 'root'
@@ -17,10 +18,7 @@ export class TabService {
     TabItem[]
   >([]);
 
-  constructor(
-    private loader: NgModuleFactoryLoader,
-    private injector: Injector
-  ) {}
+  constructor(private loader: LazyLoaderService, private injector: Injector) {}
 
   get tabItems$(): Observable<TabItem[]> {
     return this.tabItemSubject.asObservable();
@@ -29,7 +27,7 @@ export class TabService {
   open(newTab: OpenNewTabModel) {
     if (newTab.modulePath) {
       this.loader
-        .load(newTab.modulePath)
+        .loadModule(newTab.modulePath)
         .then((moduleFactory: NgModuleFactory<any>) => {
           this.openInternal(newTab, moduleFactory);
         });
@@ -38,7 +36,10 @@ export class TabService {
     }
   }
 
-  private openInternal(newTab: OpenNewTabModel, moduleFactory?: NgModuleFactory<any>) {
+  private openInternal(
+    newTab: OpenNewTabModel,
+    moduleFactory?: NgModuleFactory<any>
+  ) {
     const newTabItem: TabItem = {
       label: newTab.label,
       iconName: newTab.iconName,
@@ -46,7 +47,7 @@ export class TabService {
         componentType: newTab.componentType,
         moduleFactory: moduleFactory,
         injector: newTab.data
-          ? Injector.create(newTab.data, this.injector)
+          ? Injector.create({ providers: [newTab.data], parent: this.injector })
           : this.injector
       }
     };
