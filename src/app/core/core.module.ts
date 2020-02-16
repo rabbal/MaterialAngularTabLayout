@@ -1,13 +1,13 @@
-import { NgModule, Optional, SkipSelf } from "@angular/core";
-import { MatTabsModule } from "@angular/material/tabs";
-import { MatListModule } from "@angular/material/list";
-import { MatIconModule } from "@angular/material/icon";
-import { MatSidenavModule } from "@angular/material/sidenav";
-import { MatButtonModule } from "@angular/material/button";
-import { MatToolbarModule } from "@angular/material/toolbar";
-import { LayoutModule } from "@angular/cdk/layout";
-import { CommonModule } from "@angular/common";
-import { TabsComponent } from "./components/tabs/tabs.component";
+import { NgModule, Optional, SkipSelf } from '@angular/core';
+import { MatTabsModule } from '@angular/material/tabs';
+import { MatListModule } from '@angular/material/list';
+import { MatIconModule } from '@angular/material/icon';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatButtonModule } from '@angular/material/button';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { LayoutModule } from '@angular/cdk/layout';
+import { CommonModule } from '@angular/common';
+import { TabsComponent } from './components/tabs/tabs.component';
 
 @NgModule({
   imports: [
@@ -40,7 +40,7 @@ import { TabsComponent } from "./components/tabs/tabs.component";
 export class CoreModule {
   constructor(@Optional() @SkipSelf() core: CoreModule) {
     if (core) {
-      throw new Error("CoreModule should be imported ONLY in AppModule.");
+      throw new Error('CoreModule should be imported ONLY in AppModule.');
     }
   }
 }
