@@ -17,7 +17,8 @@ export class AppComponent {
       label: 'Loaded Lazy Component',
       iconName: 'thumb_up',
       componentType: LazyComponent,
-      modulePath: 'src/app/lazy/lazy.module#LazyModule',
+      modulePath: () =>
+        import('src/app/lazy/lazy.module').then(m => m.LazyModule),
       data: [{ provide: IdModel, useValue: <IdModel>{ id: 1 } }]
     });
   }
